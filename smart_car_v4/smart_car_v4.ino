@@ -24,16 +24,15 @@ int countEncoder1=0;
 int countEncoder2=0;
 
 //wifi
-//const char* ssid     = "cabinet_router";
-//const char* password = "123456789";
+const char* ssid     = "cabinet_router";
+const char* password = "123456789";
 
-const char* ssid     = "Archer_2.4";
-const char* password = "Br@v0MikeH0tel0123456789";
+//const char* ssid     = "Archer_2.4";
+//const char* password = "Br@v0MikeH0tel0123456789";
 
-const char* APssid = "NodeMCU";
-const char* APpassword = "123456789";
 
-const char* serverName = "http://192.168.1.154:8000/api/toycar";
+//const char* serverName = "http://192.168.1.154:8000/api/toycar";
+const char* serverName = "http://192.168.0.100:8000/api/toycar";
 
 uint32_t timer;
 
@@ -111,17 +110,14 @@ void setup() {
 
   setup_adxl();
   
-  Serial.println();
-  Serial.print("Configuring access point...");
-  
-  WiFi.mode(WIFI_AP_STA);
-  WiFi.softAP(APssid, APpassword);
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
   WiFi.begin(ssid, password);
 
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
-    if(millis() > 10000){
+    if(millis() > 30000){
       ESP.restart();
       Serial.print("restart esp");
     }
@@ -132,8 +128,6 @@ void setup() {
   Serial.println("Client IP address: ");
   Serial.println(WiFi.localIP());
    
-  Serial.println("AP IP address: ");
-  Serial.println(WiFi.softAPIP());
 
 ArduinoOTA.onStart([]() {
     String type;
@@ -189,9 +183,10 @@ void loop() {
   http.begin(serverName);
   http.addHeader("Content-Type", "application/json");
   int httpResponseCode = http.POST(data);
-  Serial.print("HTTP Response code: ");
-  Serial.println(httpResponseCode);
+//  Serial.print("HTTP Response code: ");
+//  Serial.println(httpResponseCode);
   Telnet.println(data);
+  Telnet.println("HTTP Response code: "+String(httpResponseCode));
   data = "";
 
 }
