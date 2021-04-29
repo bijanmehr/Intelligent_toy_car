@@ -26,9 +26,6 @@ int countEncoder2=0;
 //const char* ssid     = "cabinet_router";
 //const char* password = "123456789";
 
-const char* ssid     = "Archer_2.4";
-const char* password = "Br@v0MikeH0tel0123456789";
-
 const char* APssid = "NodeMCU";
 const char* APpassword = "123456789";
 

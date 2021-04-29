@@ -23,8 +23,6 @@ int countEncoder2=0;
 //const char* ssid     = "cabinet_router";
 //const char* password = "123456789";
 const int httpPort = 8000;
-const char* ssid     = "Archer_2.4";
-const char* password = "Br@v0MikeH0tel0123456789";
 
 //const char* host = "192.168.0.104";
 const char* host = "192.168.1.154";
